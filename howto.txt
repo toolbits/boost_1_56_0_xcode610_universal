@@ -8,14 +8,28 @@ mv clang-darwin.jam tools/build/src/tools/.
 
 
 
-### boost with clang
-sudo rm -rf /usr/local/boost_clang
+### boost with clang (libc++ with C++11)
+sudo rm -rf /usr/local/boost_libc++11
 
-./bootstrap.sh --with-toolset=clang --prefix=/usr/local/boost_clang
+./bootstrap.sh --with-toolset=clang --prefix=/usr/local/boost_libc++11
 ./b2 toolset=clang architecture=x86 address-model=32_64 cxxflags="-std=c++11 -stdlib=libc++" linkflags="-stdlib=libc++" threading=multi pch=off
 sudo ./b2 install toolset=clang architecture=x86 address-model=32_64 cxxflags="-std=c++11 -stdlib=libc++" linkflags="-stdlib=libc++" threading=multi pch=off
 
-sudo mkdir /usr/local/boost_clang/lib/a
-sudo mkdir /usr/local/boost_clang/lib/dylib
-sudo mv /usr/local/boost_clang/lib/*.a /usr/local/boost_clang/lib/a/.
-sudo mv /usr/local/boost_clang/lib/*.dylib /usr/local/boost_clang/lib/dylib/.
+sudo mkdir /usr/local/boost_libc++11/lib/a
+sudo mkdir /usr/local/boost_libc++11/lib/dylib
+sudo mv /usr/local/boost_libc++11/lib/*.a /usr/local/boost_libc++11/lib/a/.
+sudo mv /usr/local/boost_libc++11/lib/*.dylib /usr/local/boost_libc++11/lib/dylib/.
+
+
+
+### boost with clang (libstdc++)
+sudo rm -rf /usr/local/boost_libstdc++
+
+./bootstrap.sh --prefix=/usr/local/boost_libstdc++
+./b2 architecture=x86 address-model=32_64 cxxflags="-stdlib=libstdc++" linkflags="-stdlib=libstdc++" threading=multi pch=off
+sudo ./b2 install architecture=x86 address-model=32_64 cxxflags="-stdlib=libstdc++" linkflags="-stdlib=libstdc++" threading=multi pch=off
+
+sudo mkdir /usr/local/boost_libstdc++/lib/a
+sudo mkdir /usr/local/boost_libstdc++/lib/dylib
+sudo mv /usr/local/boost_libstdc++/lib/*.a /usr/local/boost_libstdc++/lib/a/.
+sudo mv /usr/local/boost_libstdc++/lib/*.dylib /usr/local/boost_libstdc++/lib/dylib/.
