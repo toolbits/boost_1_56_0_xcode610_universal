@@ -1,0 +1,21 @@
+### apply a patch
+# from http://github.com/toolbits/boost_1_56_0_xcode610_universal
+mv [clang-darwin.jam] boost_1_56_0/.
+
+cd boost_1_56_0
+
+mv clang-darwin.jam tools/build/src/tools/.
+
+
+
+### boost with clang
+sudo rm -rf /usr/local/boost_clang
+
+./bootstrap.sh --with-toolset=clang --prefix=/usr/local/boost_clang
+./b2 toolset=clang architecture=x86 address-model=32_64 cxxflags="-std=c++11 -stdlib=libc++" linkflags="-stdlib=libc++" threading=multi pch=off
+sudo ./b2 install toolset=clang architecture=x86 address-model=32_64 cxxflags="-std=c++11 -stdlib=libc++" linkflags="-stdlib=libc++" threading=multi pch=off
+
+sudo mkdir /usr/local/boost_clang/lib/a
+sudo mkdir /usr/local/boost_clang/lib/dylib
+sudo mv /usr/local/boost_clang/lib/*.a /usr/local/boost_clang/lib/a/.
+sudo mv /usr/local/boost_clang/lib/*.dylib /usr/local/boost_clang/lib/dylib/.
