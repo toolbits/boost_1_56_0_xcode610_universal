@@ -43,9 +43,9 @@ sudo mv /usr/local/boost_libc++11/lib/*.dylib /usr/local/boost_libc++11/lib/dyli
 ### boost with clang (libstdc++)
 sudo rm -rf /usr/local/boost_libstdc++<br/>
 
-./bootstrap.sh --with-toolset=clang --prefix=/usr/local/boost_libstdc++<br/>
-./b2 toolset=clang architecture=x86 address-model=32_64 cxxflags="-std=c++11 -stdlib=libc++" linkflags="-stdlib=libc++" threading=multi pch=off<br/>
-sudo ./b2 install toolset=clang architecture=x86 address-model=32_64 cxxflags="-std=c++11 -stdlib=libc++" linkflags="-stdlib=libc++" threading=multi pch=off<br/>
+./bootstrap.sh --prefix=/usr/local/boost_libstdc++<br/>
+./b2 architecture=x86 address-model=32_64 cxxflags="-stdlib=libstdc++" linkflags="-stdlib=libstdc++" threading=multi pch=off<br/>
+sudo ./b2 install architecture=x86 address-model=32_64 cxxflags="-stdlib=libstdc++" linkflags="-stdlib=libstdc++" threading=multi pch=off<br/>
 
 sudo mkdir /usr/local/boost_libstdc++/lib/a<br/>
 sudo mkdir /usr/local/boost_libstdc++/lib/dylib<br/>
